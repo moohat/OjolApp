@@ -1,83 +1,57 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Text, View, Image} from 'react-native';
+import ActionButton from './ActionButton';
 
-const ActionButton = props => {
-  const {title, desc} = props;
-  return (
-    <View
-      style={{
-        marginBottom: 43,
-        maxWidth: 225,
-      }}>
-      <Text
-        style={{
-          fontSize: 10,
-          color: '#7e7e7e',
-          textAlign: 'center',
-          paddingHorizontal: '15%',
-          marginBottom: 6,
-        }}>
-        {desc}
-      </Text>
-      <TouchableOpacity
-        style={{
-          backgroundColor: '#45AAF2',
-          borderRadius: 25,
-          paddingVertical: 13,
-        }}>
-        <Text
-          style={{
-            fontSize: 12,
-            fontWeight: 'bold',
-            color: 'white',
-            textTransform: 'uppercase',
-            textAlign: 'center',
-          }}>
-          {title}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+//import colors from utils
+import {colors} from '../../utils';
+//import images from assets
+import {welcomeAuth} from '../../assets';
 
-const WelcomeAuth = () => {
+const WelcomeAuth = ({navigation}) => {
+  const handleGoTo = screen => {
+    navigation.navigate(screen);
+  };
   return (
-    <View
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-        flex: 1,
-      }}>
-      <View
-        style={{
-          width: 219,
-          height: 117,
-          backgroundColor: '#45AAF2',
-          marginBottom: 10,
-        }}
-      />
-      <Text
-        style={{
-          fontSize: 18,
-          fontWeight: 'bold',
-          color: '#45AAF2',
-          marginBottom: 76,
-        }}>
-        Selamat Datang di OJOL
-      </Text>
+    <View style={styles.wrapper.page}>
+      <Image source={welcomeAuth} style={styles.wrapper.illustration} />
+      <Text style={styles.textWelcome}>Selamat Datang di OJOL</Text>
       <ActionButton
         title="Masuk"
         desc="Silahkan masuk, Jika anda sudah memiliki akun"
+        onPress={() => handleGoTo('Login')}
+
       />
       <ActionButton
         title="Register"
         desc="Silahkan daftar Jika anda belum memiliki akun"
+        onPress={() => handleGoTo('Register')}
       />
     </View>
   );
+};
+
+const styles = {
+  wrapper: {
+    page: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      flex: 1,
+    },
+    illustration: {
+      width: 219,
+      height: 117,
+      backgroundColor: colors.default,
+      marginBottom: 10,
+    },
+  },
+  textWelcome: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.default,
+    marginBottom: 76,
+  },
 };
 
 export default WelcomeAuth;
