@@ -4,13 +4,15 @@ import {TextInput} from 'react-native-gesture-handler';
 import {colors} from '../../../utils';
 
 const Input = props => {
-  const {placeholder} = props;
+  const {placeholder, ...rest} = props;
   return (
     <View>
       <TextInput
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor={colors.default}
+        {...rest}
+
       />
     </View>
   );
